@@ -175,6 +175,9 @@ public static class BridgeCommandFactory
             "revit.reflect_get" => ExecuteReflectGet(app, payload),
             "revit.reflect_set" => ExecuteReflectSet(app, payload),
 
+            // Performance & Batch Operations
+            "batch_execute" => ExecuteBatchCommands(app, payload),
+
             // DEFAULT: Try Phase registries before returning error
             _ => TryPhaseRegistries(app, tool, payload)
         };
@@ -4102,5 +4105,13 @@ public static class BridgeCommandFactory
         }
 
         return new { status = "success", target_id = targetId, property = propertyName };
+    }
+
+    // ==================== PERFORMANCE & BATCH OPERATIONS ====================
+
+    private static object ExecuteBatchCommands(UIApplication app, JsonElement payload)
+    {
+        var batchProcessor = new Performance.BatchProcessor(app);
+        return batchProcessor.ExecuteBatch(payload);
     }
 }

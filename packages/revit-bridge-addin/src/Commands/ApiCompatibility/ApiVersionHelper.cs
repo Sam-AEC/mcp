@@ -1,5 +1,6 @@
 using System;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.DB.Architecture;
 using Autodesk.Revit.UI;
 
 namespace RevitBridge.Commands.ApiCompatibility
