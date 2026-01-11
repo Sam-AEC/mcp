@@ -11,6 +11,7 @@ using RevitBridge.Commands.Core;
 using RevitBridge.Commands.Advanced;
 using RevitBridge.Commands.Specialized;
 using RevitBridge.Commands.Enhancements;
+using RevitBridge.Commands.Extended;
 
 namespace RevitBridge.Bridge;
 
@@ -180,8 +181,8 @@ public static class BridgeCommandFactory
     }
 
     /// <summary>
-    /// Try to execute command through Phase 1-4 registries
-    /// Enables 143 additional commands for total 228+ tools + 3000+ API methods via reflection
+    /// Try to execute command through Phase 1-5 registries
+    /// Enables 193 additional commands for total 278+ tools + 3000+ API methods via reflection
     /// </summary>
     private static object TryPhaseRegistries(UIApplication app, string tool, JsonElement payload)
     {
@@ -201,6 +202,10 @@ public static class BridgeCommandFactory
 
         // Phase 4: Enhancement Commands (24 tools) - Transactions, Analysis, Batch Operations
         result = Commands.Enhancements.Phase4CommandRegistry.Execute(app, tool, payload);
+        if (result != null) return result;
+
+        // Phase 5: Extended Commands (50 tools) - Rendering, Detailing, Organization, Performance, IFC
+        result = Commands.Extended.Phase5CommandRegistry.Execute(app, tool, payload);
         if (result != null) return result;
 
         // If no registry handled it, return error
@@ -370,6 +375,7 @@ public static class BridgeCommandFactory
         .Concat(Phase2CommandRegistry.GetCommandNames())
         .Concat(Phase3CommandRegistry.GetCommandNames())
         .Concat(Phase4CommandRegistry.GetCommandNames())
+        .Concat(Phase5CommandRegistry.GetCommandNames())
         .ToList();
     }
 

@@ -64,7 +64,7 @@ namespace RevitBridge.Bridge
             dialog.SetTitle("RevitMCP Help", "Documentation & Support");
 
             dialog.AddStatsGrid(
-                ("📘", "Tools", "228+"),
+                ("📘", "Tools", "278+"),
                 ("🎯", "Coverage", "99%"),
                 ("⚡", "API Methods", "3000+")
             );
@@ -99,6 +99,12 @@ namespace RevitBridge.Bridge
                 "   • Transaction Control (8)\n" +
                 "   • Analysis & QA (7)\n" +
                 "   • Batch Operations (9)\n\n" +
+                "✅ Phase 5: Extended (50 tools)\n" +
+                "   • Rendering & Visualization (10)\n" +
+                "   • Detailing & Annotation (15)\n" +
+                "   • Project Organization (8)\n" +
+                "   • Performance & Optimization (7)\n" +
+                "   • IFC & Data Exchange (10)\n\n" +
                 "🔥 Universal Reflection API\n" +
                 "   • 3000+ Revit API methods accessible!");
 
@@ -162,11 +168,15 @@ namespace RevitBridge.Bridge
             dialog.AddSeparator();
 
             dialog.AddInfoSection("Features",
-                "✅ 228+ Direct Commands (ALL PHASES)\n" +
+                "✅ 278+ Direct Commands (ALL 5 PHASES)\n" +
                 "✅ 3000+ API Methods (Reflection)\n" +
                 "✅ 99% Workflow Coverage\n" +
                 "✅ Natural Language Support\n" +
                 "✅ All Disciplines (Arch, MEP, Structural)\n" +
+                "✅ Rendering & Visualization\n" +
+                "✅ Advanced Detailing & Annotation\n" +
+                "✅ IFC Export & Data Exchange\n" +
+                "✅ Performance Optimization\n" +
                 "✅ Advanced Geometry & Filtering\n" +
                 "✅ Batch Operations at Scale\n" +
                 "✅ Quality Assurance & Analysis\n" +

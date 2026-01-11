@@ -22,8 +22,9 @@
 Production-ready MCP server enabling AI agents to control Autodesk Revit through natural language. Integrates with Claude Desktop, Microsoft Copilot, and custom MCP clients.
 
 **Key Features:**
-- **228+ Revit API tools** (ALL 4 phases enabled!)
+- **278+ Revit API tools** (ALL 5 phases enabled!)
 - **3000+ methods** via Universal Reflection API
+- Rendering, detailing, IFC export, performance optimization
 - Advanced filtering, geometry, MEP, structural, batch operations
 - Localhost-only bridge with <100ms latency
 - Thread-safe ExternalEvent architecture
@@ -271,7 +272,66 @@ Expected response:
 ### Revisions
 - `revit.get_revision_sequences` - Get revision sequences
 
-**Total: 228+ tools** • **Full API Reference:** [docs/tools.md](docs/tools.md) • **Upgrade Details:** [docs/API_UPGRADE_COMPLETE.md](docs/API_UPGRADE_COMPLETE.md)
+### Rendering & Visualization (Phase 5)
+- `revit.get_render_settings` - Get rendering settings
+- `revit.set_render_quality` - Set render quality
+- `revit.get_camera_settings` - Get camera settings
+- `revit.set_camera_position` - Set camera position
+- `revit.get_sun_settings` - Get sun settings
+- `revit.set_sun_position` - Set sun position
+- `revit.get_lighting_scheme` - Get lighting scheme
+- `revit.set_visual_style` - Set visual style
+- `revit.get_material_appearance` - Get material appearance
+- `revit.set_material_appearance` - Set material appearance
+
+### Detailing & Annotation (Phase 5)
+- `revit.create_detail_line` - Create detail line
+- `revit.create_detail_arc` - Create detail arc
+- `revit.create_filled_region` - Create filled region
+- `revit.create_masking_region` - Create masking region
+- `revit.list_filled_region_types` - List filled region types
+- `revit.create_detail_component` - Create detail component
+- `revit.list_detail_components` - List detail components
+- `revit.create_insulation` - Create insulation
+- `revit.list_line_styles` - List line styles
+- `revit.set_detail_line_style` - Set detail line style
+- `revit.get_detail_item_bounding_box` - Get detail item bounding box
+- `revit.create_repeating_detail` - Create repeating detail
+- `revit.create_breakline` - Create breakline
+- `revit.list_detailing_symbols` - List detailing symbols
+
+### Project Organization (Phase 5)
+- `revit.organize_browser_by_parameter` - Organize browser by parameter
+- `revit.create_parameter_filter` - Create parameter filter
+- `revit.list_view_filters` - List view filters
+- `revit.apply_filter_to_view` - Apply filter to view
+- `revit.get_project_parameter_groups` - Get project parameter groups
+- `revit.organize_sheets_by_parameter` - Organize sheets by parameter
+- `revit.get_keynote_table` - Get keynote table
+- `revit.get_view_organization_structure` - Get view organization structure
+
+### Performance & Optimization (Phase 5)
+- `revit.purge_unused_elements` - Purge unused elements
+- `revit.compact_file` - Compact file
+- `revit.get_model_statistics` - Get model statistics
+- `revit.analyze_model_performance` - Analyze model performance
+- `revit.get_warnings_summary` - Get warnings summary
+- `revit.audit_model` - Audit model
+- `revit.optimize_view_performance` - Optimize view performance
+
+### Advanced IFC & Data Exchange (Phase 5)
+- `revit.get_ifc_export_configurations` - Get IFC export configurations
+- `revit.export_ifc_with_custom_settings` - Export IFC with custom settings
+- `revit.get_ifc_property_sets` - Get IFC property sets
+- `revit.set_ifc_properties` - Set IFC properties
+- `revit.get_classification_systems` - Get classification systems
+- `revit.export_cobie_data` - Export COBie data
+- `revit.get_bcf_topics` - Get BCF topics
+- `revit.map_parameters_to_ifc` - Map parameters to IFC
+- `revit.get_data_exchange_settings` - Get data exchange settings
+- `revit.validate_ifc_export` - Validate IFC export
+
+**Total: 278+ tools** • **Full API Reference:** [docs/tools.md](docs/tools.md) • **Upgrade Details:** [docs/API_UPGRADE_COMPLETE.md](docs/API_UPGRADE_COMPLETE.md)
 
 ---
 

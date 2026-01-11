@@ -185,8 +185,9 @@ namespace RevitBridge.Bridge
 
             // Capabilities - NOW WITH ALL PHASES ENABLED!
             string capabilities = "✅ Universal Bridge Enabled\n" +
-                                 "✅ 228+ Direct Tools (ALL PHASES ACTIVE)\n" +
+                                 "✅ 278+ Direct Tools (ALL 5 PHASES ACTIVE)\n" +
                                  "✅ Reflection API (3000+ methods)\n" +
+                                 "✅ Rendering, Detailing, IFC Export\n" +
                                  "✅ Advanced Filtering & Geometry\n" +
                                  "✅ MEP, Structural, Phasing\n" +
                                  "✅ Batch Operations & Analysis\n" +
