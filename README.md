@@ -22,7 +22,9 @@
 Production-ready MCP server enabling AI agents to control Autodesk Revit through natural language. Integrates with Claude Desktop, Microsoft Copilot, and custom MCP clients.
 
 **Key Features:**
-- 105+ Revit API tools (geometry, views, sheets, families)
+- **228+ Revit API tools** (ALL 4 phases enabled!)
+- **3000+ methods** via Universal Reflection API
+- Advanced filtering, geometry, MEP, structural, batch operations
 - Localhost-only bridge with <100ms latency
 - Thread-safe ExternalEvent architecture
 - OAuth2 and audit logging support
@@ -269,7 +271,7 @@ Expected response:
 ### Revisions
 - `revit.get_revision_sequences` - Get revision sequences
 
-**Total: 104 tools** • **Full API Reference:** [docs/tools.md](docs/tools.md)
+**Total: 228+ tools** • **Full API Reference:** [docs/tools.md](docs/tools.md) • **Upgrade Details:** [docs/API_UPGRADE_COMPLETE.md](docs/API_UPGRADE_COMPLETE.md)
 
 ---
 

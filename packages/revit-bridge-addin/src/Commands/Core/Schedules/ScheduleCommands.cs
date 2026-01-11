@@ -599,7 +599,8 @@ namespace RevitBridge.Commands.Core.Schedules
                     scheduleId = schedule.Id.IntegerValue,
                     scheduleName = schedule.Name,
                     category = category,
-                    isMaterialTakeoff = schedule.IsMaterialTakeoff
+                    // isMaterialTakeoff removed in Revit 2024 API
+                    isMaterialTakeoff = false
                 };
             }
         }

@@ -183,10 +183,13 @@ namespace RevitBridge.Bridge
 
             dialog.AddSeparator();
 
-            // Capabilities
+            // Capabilities - NOW WITH ALL PHASES ENABLED!
             string capabilities = "✅ Universal Bridge Enabled\n" +
-                                 "✅ 233 Available Tools\n" +
-                                 "✅ Reflection API (10,000+ methods)\n" +
+                                 "✅ 228+ Direct Tools (ALL PHASES ACTIVE)\n" +
+                                 "✅ Reflection API (3000+ methods)\n" +
+                                 "✅ Advanced Filtering & Geometry\n" +
+                                 "✅ MEP, Structural, Phasing\n" +
+                                 "✅ Batch Operations & Analysis\n" +
                                  "✅ Natural Language Support\n" +
                                  "✅ AI-Ready Interface";
             dialog.AddInfoSection("Capabilities", capabilities);

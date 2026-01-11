@@ -471,7 +471,7 @@ namespace RevitBridge.Commands.Core.Filtering
                             currentIds = new FilteredElementCollector(doc)
                                 .WhereElementIsNotElementType()
                                 .OfCategory(builtInCat)
-                                .ToElementIds()
+                                .Select(e => e.Id)
                                 .ToList();
                         }
                         break;
@@ -500,7 +500,7 @@ namespace RevitBridge.Commands.Core.Filtering
                             currentIds = new FilteredElementCollector(doc)
                                 .WhereElementIsNotElementType()
                                 .WherePasses(new ElementLevelFilter(level.Id))
-                                .ToElementIds()
+                                .Select(e => e.Id)
                                 .ToList();
                         }
                         break;

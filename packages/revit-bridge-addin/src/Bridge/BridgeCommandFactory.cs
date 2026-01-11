@@ -7,6 +7,10 @@ using Autodesk.Revit.UI;
 using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.DB.Mechanical;
 using Autodesk.Revit.DB.Plumbing;
+using RevitBridge.Commands.Core;
+using RevitBridge.Commands.Advanced;
+using RevitBridge.Commands.Specialized;
+using RevitBridge.Commands.Enhancements;
 
 namespace RevitBridge.Bridge;
 
@@ -170,8 +174,37 @@ public static class BridgeCommandFactory
             "revit.reflect_get" => ExecuteReflectGet(app, payload),
             "revit.reflect_set" => ExecuteReflectSet(app, payload),
 
-            _ => new { status = "error", message = $"Unknown tool: {tool}" }
+            // DEFAULT: Try Phase registries before returning error
+            _ => TryPhaseRegistries(app, tool, payload)
         };
+    }
+
+    /// <summary>
+    /// Try to execute command through Phase 1-4 registries
+    /// Enables 143 additional commands for total 228+ tools + 3000+ API methods via reflection
+    /// </summary>
+    private static object TryPhaseRegistries(UIApplication app, string tool, JsonElement payload)
+    {
+        object result;
+
+        // Phase 1: Core Commands (40 tools) - Filtering, Units, Schedules, Views
+        result = Commands.Core.Phase1CommandRegistry.Execute(app, tool, payload);
+        if (result != null) return result;
+
+        // Phase 2: Advanced Commands (51 tools) - Geometry, Families, Worksharing, Links
+        result = Commands.Advanced.Phase2CommandRegistry.Execute(app, tool, payload);
+        if (result != null) return result;
+
+        // Phase 3: Specialized Commands (28 tools) - MEP, Structural, Stairs, Phasing
+        result = Commands.Specialized.Phase3CommandRegistry.Execute(app, tool, payload);
+        if (result != null) return result;
+
+        // Phase 4: Enhancement Commands (24 tools) - Transactions, Analysis, Batch Operations
+        result = Commands.Enhancements.Phase4CommandRegistry.Execute(app, tool, payload);
+        if (result != null) return result;
+
+        // If no registry handled it, return error
+        return new { status = "error", message = $"Unknown tool: {tool}" };
     }
 
     public static List<string> GetToolCatalog()
@@ -332,7 +365,12 @@ public static class BridgeCommandFactory
             "revit.invoke_method",
             "revit.reflect_get",
             "revit.reflect_set"
-        };
+        }
+        .Concat(Phase1CommandRegistry.GetCommandNames())
+        .Concat(Phase2CommandRegistry.GetCommandNames())
+        .Concat(Phase3CommandRegistry.GetCommandNames())
+        .Concat(Phase4CommandRegistry.GetCommandNames())
+        .ToList();
     }
 
     // ==================== EXISTING TOOLS ====================
