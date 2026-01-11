@@ -11,9 +11,16 @@
         AllowsTransparency="True">
 
     <Window.Resources>
-        <!-- Modern Button Style -->
+        <!-- Modern Button Style with Brand Colors -->
         <Style x:Key="ModernButton" TargetType="Button">
-            <Setter Property="Background" Value="#2196F3"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#607DFF" Offset="0"/>
+                        <GradientStop Color="#3A4D9B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -24,8 +31,11 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
-                                CornerRadius="4"
+                                CornerRadius="6"
                                 Padding="{TemplateBinding Padding}">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#607DFF" Opacity="0.3" BlurRadius="8" ShadowDepth="0"/>
+                            </Border.Effect>
                             <ContentPresenter HorizontalAlignment="Center"
                                             VerticalAlignment="Center"/>
                         </Border>
@@ -34,10 +44,24 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#1976D2"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#7090FF" Offset="0"/>
+                                <GradientStop Color="#4A5DAB" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
                 </Trigger>
                 <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#0D47A1"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#506AEF" Offset="0"/>
+                                <GradientStop Color="#2A3D8B" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -78,8 +102,14 @@
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
 
-            <!-- Header -->
-            <Border Grid.Row="0" Background="#2196F3" CornerRadius="8,8,0,0">
+            <!-- Header with Gradient -->
+            <Border Grid.Row="0" CornerRadius="8,8,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#607DFF" Offset="0"/>
+                        <GradientStop Color="#3A4D9B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -87,12 +117,13 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Icon/Logo -->
-                    <Viewbox Grid.Column="0" Width="40" Height="40" Margin="15,0,10,0">
-                        <Canvas Width="24" Height="24">
-                            <Path Fill="White" Data="M12,2L2,7V17L12,22L22,17V7M12,4.4L19.2,8.2V15.8L12,19.6L4.8,15.8V8.2"/>
-                        </Canvas>
-                    </Viewbox>
+                    <!-- Modern MCP Logo -->
+                    <Border Grid.Column="0" Width="45" Height="45" Margin="15,0,10,0"
+                            Background="White" CornerRadius="8" Padding="8">
+                        <Viewbox>
+                            <TextBlock Text="MCP" FontWeight="Bold" FontSize="14" Foreground="#607DFF"/>
+                        </Viewbox>
+                    </Border>
 
                     <!-- Title -->
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">

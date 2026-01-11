@@ -75,24 +75,30 @@ namespace RevitBridge.Bridge
             );
             Directory.CreateDirectory(iconPath);
 
-            // Generate and save icons
-            var connectIcon = IconGenerator.CreateConnectIcon(32);
-            var disconnectIcon = IconGenerator.CreateDisconnectIcon(32);
-            var statusIcon = IconGenerator.CreateStatusIcon(32);
-            var brandIcon = IconGenerator.CreateBrandIcon(32);
-            var settingsIcon = IconGenerator.CreateSettingsIcon(32);
+            // Generate and save professional icons
+            var connectIcon = ProfessionalIconGenerator.CreateConnectIcon(32);
+            var disconnectIcon = ProfessionalIconGenerator.CreateDisconnectIcon(32);
+            var statusIcon = ProfessionalIconGenerator.CreateStatusIcon(32);
+            var brandIcon = ProfessionalIconGenerator.CreateBrandIcon(32);
+            var settingsIcon = ProfessionalIconGenerator.CreateSettingsIcon(32);
+            var helpIcon = ProfessionalIconGenerator.CreateHelpIcon(32);
+            var aboutIcon = ProfessionalIconGenerator.CreateAboutIcon(32);
 
             string connectIconPath = Path.Combine(iconPath, "connect.png");
             string disconnectIconPath = Path.Combine(iconPath, "disconnect.png");
             string statusIconPath = Path.Combine(iconPath, "status.png");
             string brandIconPath = Path.Combine(iconPath, "brand.png");
             string settingsIconPath = Path.Combine(iconPath, "settings.png");
+            string helpIconPath = Path.Combine(iconPath, "help.png");
+            string aboutIconPath = Path.Combine(iconPath, "about.png");
 
-            IconGenerator.SaveIcon(connectIcon, connectIconPath);
-            IconGenerator.SaveIcon(disconnectIcon, disconnectIconPath);
-            IconGenerator.SaveIcon(statusIcon, statusIconPath);
-            IconGenerator.SaveIcon(brandIcon, brandIconPath);
-            IconGenerator.SaveIcon(settingsIcon, settingsIconPath);
+            ProfessionalIconGenerator.SaveIcon(connectIcon, connectIconPath);
+            ProfessionalIconGenerator.SaveIcon(disconnectIcon, disconnectIconPath);
+            ProfessionalIconGenerator.SaveIcon(statusIcon, statusIconPath);
+            ProfessionalIconGenerator.SaveIcon(brandIcon, brandIconPath);
+            ProfessionalIconGenerator.SaveIcon(settingsIcon, settingsIconPath);
+            ProfessionalIconGenerator.SaveIcon(helpIcon, helpIconPath);
+            ProfessionalIconGenerator.SaveIcon(aboutIcon, aboutIconPath);
 
             // === CONNECTION PANEL ===
 
@@ -161,11 +167,26 @@ namespace RevitBridge.Bridge
                 assemblyPath,
                 "RevitBridge.Bridge.CommandHelp"
             );
-            helpBtnData.ToolTip = "View Documentation";
-            helpBtnData.LongDescription = "Open the RevitMCP Bridge documentation and user guide.";
+            helpBtnData.ToolTip = "View Documentation & Guide";
+            helpBtnData.LongDescription = "Open the RevitMCP Bridge documentation, quick start guide, and API reference.";
+            helpBtnData.Image = new System.Windows.Media.Imaging.BitmapImage(new Uri(helpIconPath));
+            helpBtnData.LargeImage = new System.Windows.Media.Imaging.BitmapImage(new Uri(helpIconPath));
+
+            // About Button
+            PushButtonData aboutBtnData = new PushButtonData(
+                "cmdAbout",
+                "About",
+                assemblyPath,
+                "RevitBridge.Bridge.CommandAbout"
+            );
+            aboutBtnData.ToolTip = "About RevitMCP Bridge";
+            aboutBtnData.LongDescription = "View version information, credits, and system details for the RevitMCP Bridge.";
+            aboutBtnData.Image = new System.Windows.Media.Imaging.BitmapImage(new Uri(aboutIconPath));
+            aboutBtnData.LargeImage = new System.Windows.Media.Imaging.BitmapImage(new Uri(aboutIconPath));
 
             toolsPanel.AddItem(settingsBtnData);
             toolsPanel.AddItem(helpBtnData);
+            toolsPanel.AddItem(aboutBtnData);
 
             // Add panel title text
             TextBoxData textBoxData = new TextBoxData("txtInfo");
