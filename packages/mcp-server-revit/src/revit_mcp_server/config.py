@@ -8,6 +8,7 @@ from typing import List
 
 from dotenv import load_dotenv
 from pydantic import DirectoryPath, Field, field_validator
+from pydantic_core import PydanticUndefined
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic_settings.sources.providers import env as env_source
 
@@ -53,6 +54,7 @@ class Config(BaseSettings):
     mode: BridgeMode = Field(default=BridgeMode.mock)
     audit_log: Path = Field(default_factory=lambda: Path("audit.log"))
     log_level: str = Field("INFO")
+    ribbon_mode: bool = Field(default=False)
 
     model_config = SettingsConfigDict(
         env_prefix="MCP_REVIT_",
@@ -64,6 +66,14 @@ class Config(BaseSettings):
     def split_directories(cls, value):
         if isinstance(value, str):
             return [Path(p.strip()) for p in value.split(";") if p.strip()]
+        return value
+
+    @field_validator("ribbon_mode", mode="before")
+    def parse_ribbon_mode(cls, value):
+        if value is None or value is PydanticUndefined:
+            env_value = os.getenv("RIBBON_MODE")
+            if env_value is not None:
+                return env_value
         return value
 
     @classmethod

@@ -124,6 +124,50 @@ Expected response:
 
 ---
 
+## Ribbon Mode (Progressive Disclosure)
+
+### How the Ribbon system works
+
+- Enable with `RIBBON_MODE=true` (or `MCP_REVIT_RIBBON_MODE=true`) to expose only the Ribbon meta-API.
+- The LLM navigates `Category -> Capability -> Command` and calls `nav.execute(command_id, params)` for work.
+- All 278+ underlying tools remain server-side; commands map to internal plans of those tools.
+- Results default to `summary`; large payloads are stored server-side and returned as `report_id` (retrieve via `report.get`).
+- Escape hatch discovery uses `nav.search_tools(category_id, query)` and advanced tool access (`nav.tool_open` / `nav.tool_run`) scoped to the selected category. These advanced endpoints are available but not listed by default to keep the Ribbon tool list <= 10.
+
+### How to add a new command
+
+1. Add a curated command in `packages/mcp-server-revit/src/revit_mcp_server/ribbon/registry.py` under `_curated_commands`.
+2. Provide a stable `command_id`, short `label`, `description`, minimal schema, examples, and an `underlying_plan`.
+3. If the command is high-risk, set `risk_level="break_glass"` and require `confirm=true` plus a `reason`.
+
+### How to categorize a tool
+
+1. Update keyword rules in `packages/mcp-server-revit/src/revit_mcp_server/ribbon/catalog.py`.
+2. Tools are auto-classified by name/description; unmatched tools fall back to `UTILITIES`.
+3. For curated commands, you can override `category_id` and `capability_id` explicitly.
+
+### Example LLM call sequences
+
+1. Create a permit drawing set:
+   - `nav.search_commands("SHEETS_DOCS", "permit set")`
+   - `nav.command_help("sheets.create_from_csv")`
+   - `nav.execute("sheets.create_from_csv", { "csv_path": "C:/sheets.csv" })`
+2. Swap window supplier A to B:
+   - `nav.search_commands("FAMILIES_TYPES", "swap type")`
+   - `nav.command_help("families.swap_type")`
+   - `nav.execute("families.swap_type", { "element_ids": [101, 102], "value": "Supplier B - Type 02", "confirm": true, "reason": "Client swap" })`
+3. Run QC and get report:
+   - `nav.search_commands("QC_COMPLIANCE", "warnings report")`
+   - `nav.command_help("qc.warnings_report")`
+   - `nav.execute("qc.warnings_report", {})` -> returns `report_id`
+
+### Benchmarks
+
+- Script: `scripts/benchmark_ribbon.py`
+- Latest sample numbers: `docs/benchmarks/ribbon_benchmark.json`
+
+---
+
 ## Available Tools
 
 ### Document Management

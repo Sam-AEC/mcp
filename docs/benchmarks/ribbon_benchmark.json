@@ -1,0 +1,44 @@
+{
+  "assumptions": {
+    "rtt_ms_per_call": 150
+  },
+  "create_views_sheets_set": {
+    "old_mode": {
+      "tool_calls": 1,
+      "approx_tokens": 6149,
+      "estimated_latency_ms": 150
+    },
+    "ribbon_mode": {
+      "tool_calls": 3,
+      "approx_tokens": 431,
+      "estimated_latency_ms": 450
+    },
+    "token_reduction_pct": 92.99
+  },
+  "swap_types": {
+    "old_mode": {
+      "tool_calls": 1,
+      "approx_tokens": 6151,
+      "estimated_latency_ms": 150
+    },
+    "ribbon_mode": {
+      "tool_calls": 3,
+      "approx_tokens": 496,
+      "estimated_latency_ms": 450
+    },
+    "token_reduction_pct": 91.94
+  },
+  "qc_report": {
+    "old_mode": {
+      "tool_calls": 1,
+      "approx_tokens": 6492,
+      "estimated_latency_ms": 150
+    },
+    "ribbon_mode": {
+      "tool_calls": 3,
+      "approx_tokens": 229,
+      "estimated_latency_ms": 450
+    },
+    "token_reduction_pct": 96.47
+  }
+}
